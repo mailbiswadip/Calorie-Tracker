@@ -281,6 +281,7 @@
       { name: 'Fried egg', kcal: 110 },
       { name: 'Chickpea & potato curry (1 cup)', kcal: 220 },
       { name: 'Veg & potato curry (1 cup)', kcal: 180 },
+      { name: 'Paneer matar (5 pieces)', kcal: 280 },
     ]},
     { title: 'Grains & breads', items: [
       { name: 'Rice (1 cup)', kcal: 200 },
@@ -307,6 +308,7 @@
     { title: 'Dairy, drinks & fruit', items: [
       { name: 'Tea with milk, no sugar', kcal: 65 },
       { name: 'Coffee with milk, no sugar', kcal: 65 },
+      { name: 'Sugar, 1 tsp', kcal: 16 },
       { name: 'Fruit juice (1 cup)', kcal: 125 },
       { name: 'Banana', kcal: 100 },
       { name: 'Medium fruit', kcal: 100 },
@@ -366,7 +368,8 @@
   const toast = document.getElementById('toast');
 
   // ---- INIT ----
-  dateInput.value = new Date().toISOString().slice(0, 10);
+  const TODAY = new Date().toISOString().slice(0, 10);
+  dateInput.value = TODAY;
   gaugeProgress.setAttribute('stroke-dasharray', C.toFixed(2));
 
   CATEGORIES.forEach(cat => {
@@ -444,6 +447,8 @@
       const state = JSON.parse(raw);
 
       if (state.date) dateInput.value = state.date;
+      // Always override with today's date
+      dateInput.value = TODAY;
 
       if (state.profileData) {
         profileData = state.profileData;
